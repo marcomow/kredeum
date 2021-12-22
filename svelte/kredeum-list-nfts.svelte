@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Collection, Network, Nft } from "lib/ktypes";
+  import type { Signer } from "ethers";
 
   import {
     sleep,
@@ -18,12 +19,13 @@
     explorerAddressLink
   } from "lib/knfts";
   import { listNFTsTokenId, listNFTsFromCache, addNftMetadata } from "lib/klist-nfts";
+  import { transferNft } from "lib/ktransfer";
   import { getNetwork, getShortAddress } from "lib/kconfig";
   import { createEventDispatcher } from "svelte";
   import { nftUrl, nftsUrl } from "lib/kconfig";
   import { clearCache } from "lib/klist-nfts";
 
-  import { chainId, owner, provider } from "./network";
+  import { chainId, owner, provider, signer } from "./network";
   import { Provider } from "@ethersproject/abstract-provider";
 
   // down to component
@@ -37,7 +39,6 @@
 
   let NFTs: Map<string, Nft>;
   let allNFTs: Map<string, Nft>;
-  let Collections: Array<Collection>;
   let nftImport: number;
 
   // Track NFTs div offsetHeight with "more" details
@@ -150,6 +151,9 @@
 
   const moreToggle = (i: number): void => {
     mores[i] = mores[i] ? 0 : (document.getElementById(`more-detail-${i}`)?.offsetHeight || 0) + 70;
+
+  const transfer = async (nft: Nft) => {
+    await transferNft(nft, $signer);
   };
 
   const shortcode = async (nft: Nft) => {
@@ -260,6 +264,7 @@
             </div>
             <div id="description-{i}" class="description">
               <strong>Description</strong>
+              <i on:click={() => transfer(nft)} class="fas fa-gift" />
               <p>
                 {nftDescription(nft)}
               </p>

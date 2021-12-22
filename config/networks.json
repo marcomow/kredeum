@@ -77,10 +77,10 @@
     ],
     "subgraph": {
       "url": "https://api.thegraph.com/subgraphs/name/zapaz/eip721-rinkeby",
-      "active": true
+      "active": false
     },
     "eip1559": true,
-    "nftsFactory": "0xec7EBB4E7cdcE23e992BFDc4fc81D89Cc9Ac9A74",
+    "nftsFactory": "0x648a844C8154414dD0b141ff443A7Ca0580d020D",
     "create": true,
     "testnet": true
   },
@@ -147,7 +147,7 @@
     ],
     "subgraph": {
       "url": "https://api.thegraph.com/subgraphs/name/zapaz/eip721-mumbai",
-      "active": true
+      "active": false
     },
     "covalent": {
       "active": true
