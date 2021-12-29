@@ -29,7 +29,7 @@ const getCollection = async (
   // TODO : Get supported interfaces via onchain proxy smartcontract
   if (chainId && collection && signerOrProvider) {
     try {
-      const checkContract = new Contract(
+      const checkContract: ERC165Upgradeable = new Contract(
         collection,
         abis.ERC165.abi,
         signerOrProvider

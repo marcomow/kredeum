@@ -151,6 +151,7 @@
 
   const moreToggle = (i: number): void => {
     mores[i] = mores[i] ? 0 : (document.getElementById(`more-detail-${i}`)?.offsetHeight || 0) + 70;
+  };
 
   const transfer = async (nft: Nft) => {
     await transferNft(nft, $signer);
